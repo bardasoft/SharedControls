@@ -2,14 +2,14 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E158B202-F9E2-4A06-B1EF-9902E5877EB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharedControls</RootNamespace>
     <AssemblyName>SharedControls</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SccProjectName>SAK</SccProjectName>
@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\Builds\Shared\Debug\SharedControls.XML</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -38,12 +39,13 @@
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <DocumentationFile>..\Builds\Shared\Release\SharedControls.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>SharedControls.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SharedControls.key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
@@ -72,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DatabaseBackup.cs" />
+    <Compile Include="Classes\DateTimeEx.cs" />
     <Compile Include="Classes\HTMLTableParser.cs" />
     <Compile Include="Classes\ListViewEx.cs">
       <SubType>Component</SubType>
@@ -237,7 +240,7 @@
     <None Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="SharedControls.pfx" />
+    <None Include="SharedControls.key.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Hunspellx86.dll">
@@ -264,8 +267,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>T:\Tools\BuildUtil\UpdateVersion.exe /out="$(ProjectDir)Properties\ver.txt" /$(ConfigurationName) /path="$(ProjectDir)</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>T:\Tools\BuildUtil\Build.Deploy.Util.exe /IgnoreDebug /$(ConfigurationName) /target="$(TargetPath)" /git="C:\Program Files\Git\bin\git.exe" /gitrepository="SharedControls" /GitWorkingDir="T:\GitProjects\SharedControls" /NugetPack="T:\GitProjects\SharedControls\SharedControls.nuspec" /NugetVer=3 /NugetExe="t:\tools\nuget\nuget.exe" /netVersion=net452 /nugetKeyFile="T:\GitProjects\Private NUGET Key.txt" /nugetPush</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

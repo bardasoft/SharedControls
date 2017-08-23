@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SC.SharedControls</id>
+    <version>$version$</version>
+    <title>Shared Controls for Winform applications</title>
+    <authors>Simon Carter</authors>
+    <owners>Simon Carter</owners>
+    <licenseUrl>https://github.com/k3ldar/SharedControls/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/k3ldar/SharedControls</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Shared Controls/Classes for Winform applications.  Also requires SC.Shared.Library nuget package</description>
+    <copyright>Copyright 2010 - 2017 (C).  Simon Carter.  All Rights Reserved.</copyright>
+    <tags>Shared Controls</tags>
+  </metadata>
+</package>

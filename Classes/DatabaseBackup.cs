@@ -11,10 +11,8 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Threading;
-using System.Reflection;
 
 using Shared.Classes;
 
@@ -34,11 +32,21 @@ namespace SharedControls.Classes.Backup
         #endregion Private Members
 
         #region Public Static Methods
-
+        
         /// <summary>
-        /// Backup database
+        /// Database Backup
         /// </summary>
         /// <param name="backupPath">Path to where backups are sent</param>
+        /// <param name="upload"></param>
+        /// <param name="useSiteID"></param>
+        /// <param name="siteID"></param>
+        /// <param name="name"></param>
+        /// <param name="threadName"></param>
+        /// <param name="connectionString"></param>
+        /// <param name="ftpHost"></param>
+        /// <param name="ftpUsername"></param>
+        /// <param name="ftpPassword"></param>
+        /// <param name="ftpPort"></param>
         public static void BackupDatabase(string backupPath, bool upload, bool useSiteID, int siteID, 
             string name, string threadName, string connectionString, string ftpHost, string ftpUsername, 
             string ftpPassword, int ftpPort)
@@ -71,6 +79,10 @@ namespace SharedControls.Classes.Backup
 
         #region Constructors
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options"></param>
         public DatabaseBackupThread(DatabaseBackupOptions options)
             : base(options, new TimeSpan())
         {
@@ -81,6 +93,9 @@ namespace SharedControls.Classes.Backup
 
         #region Public Properties
 
+        /// <summary>
+        /// Determines if a backup is currently being completed
+        /// </summary>
         public static bool BackupsInProgress
         {
             get
@@ -107,6 +122,11 @@ namespace SharedControls.Classes.Backup
 
         #region Overridden Methods
 
+        /// <summary>
+        /// Performs a backup
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         protected override bool Run(object parameters)
         {
             DatabaseBackupOptions options = (DatabaseBackupOptions)parameters;
@@ -213,6 +233,19 @@ namespace SharedControls.Classes.Backup
     {
         #region Constructors
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="useSiteID"></param>
+        /// <param name="siteID"></param>
+        /// <param name="name"></param>
+        /// <param name="upload"></param>
+        /// <param name="connectionString"></param>
+        /// <param name="ftpHost"></param>
+        /// <param name="ftpUsername"></param>
+        /// <param name="ftpPassword"></param>
+        /// <param name="ftpPort"></param>
         public DatabaseBackupOptions(string path, bool useSiteID, int siteID, string name, 
             bool upload, string connectionString, string ftpHost, string ftpUsername,
             string ftpPassword, int ftpPort)
@@ -272,6 +305,10 @@ namespace SharedControls.Classes.Backup
 
         #region Public Overridden Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (String.Format("{0} - {1}", Name, Path));
@@ -285,27 +322,58 @@ namespace SharedControls.Classes.Backup
     /// </summary>
     public enum DatabaseBackupStage
     {
+        /// <summary>
+        /// Backup has started
+        /// </summary>
         BackupStarted,
 
+        /// <summary>
+        /// Backup in progress
+        /// </summary>
         BackingUpDatabase,
 
+        /// <summary>
+        /// Backup Complete
+        /// </summary>
         DatabaseBackupComplete,
 
+        /// <summary>
+        /// Backup compress start
+        /// </summary>
         CompressingBackup,
 
+        /// <summary>
+        /// Backup compressed
+        /// </summary>
         BackupCompressed,
 
+        /// <summary>
+        /// Backup being sent to server
+        /// </summary>
         SendingFileToServer,
 
+        /// <summary>
+        /// File sent to server
+        /// </summary>
         FileSentToServer,
 
+        /// <summary>
+        /// Backup finished
+        /// </summary>
         BackupComplete
     }
 
+    /// <summary>
+    /// Backup event arguments
+    /// </summary>
     public sealed class DatabaseBackupEventArgs : EventArgs
     {
         #region Constructors
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="stage"></param>
         public DatabaseBackupEventArgs(DatabaseBackupStage stage)
         {
             Stage = stage;
@@ -323,5 +391,9 @@ namespace SharedControls.Classes.Backup
         #endregion Properties
     }
 
+    /// <summary>
+    /// Event handler
+    /// </summary>
+    /// <param name="e"></param>
     public delegate void DatabaseBackupEventHandler(DatabaseBackupStage e);
 }

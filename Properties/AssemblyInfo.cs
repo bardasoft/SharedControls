@@ -1,15 +1,25 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
+/*
+ *  The contents of this file are subject to MIT Licence.  Please
+ *  view License.txt for further details. 
+ *
+ *  The Original Code was created by Simon Carter (s1cart3r@gmail.com)
+ *
+ *  Copyright (c) 2010 Simon Carter
+ *
+ *  Purpose:  Assembly File
+ *
+ */
+ using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SharedControls")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Shared Controls/Classes for Winform applications")]
 [assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Simon Carter")]
 [assembly: AssemblyProduct("SharedControls")]
-[assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("Copyright © 2010 - 2017.  Simon Carter.  All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -29,4 +39,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.7.0.192")]
+[assembly: AssemblyVersion("2.8.10.201")]

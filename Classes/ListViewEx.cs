@@ -10,10 +10,8 @@
  *
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 using Shared;
@@ -58,6 +56,7 @@ namespace SharedControls.Classes
         public ListViewEx()
             : base()
         {
+            this.DoubleBuffered = true;
             _listSorted = false;
             _lvColumnSorter = new SharedControls.ListViewColumnSorter();
             this.ListViewItemSorter = _lvColumnSorter;

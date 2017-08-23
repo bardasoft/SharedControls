@@ -45,17 +45,6 @@ namespace SharedControls
         /// </summary>
         public Label HintControl { get; set; }
 
-        /// <summary>
-        /// determines wether the control is in design mode within an editor
-        /// </summary>
-        protected static bool IsDesignMode
-        {
-            get
-            {
-                return (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
-            }
-        }
-
         #endregion Properties
 
         #region Virtual Methods
