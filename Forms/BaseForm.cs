@@ -10,13 +10,11 @@
  *
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
+
+#pragma warning disable IDE0016 // null check simplified
 
 namespace SharedControls.Forms
 {

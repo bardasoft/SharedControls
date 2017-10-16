@@ -10,14 +10,12 @@
  *
  */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 
 using SharedControls.Forms;
+
+#pragma warning disable IDE1006 // naming rule violation
 
 namespace SharedControls.WizardBase
 {
@@ -79,7 +77,72 @@ namespace SharedControls.WizardBase
 
         #endregion Static Methods
 
+        #region Public Enums
+
+        /// <summary>
+        /// Button Types
+        /// </summary>
+        public enum ButtonType
+        {
+            /// <summary>
+            /// CancelButton
+            /// </summary>
+            Cancel,
+
+            /// <summary>
+            /// Previous button
+            /// </summary>
+            Previous,
+
+            /// <summary>
+            /// Next button
+            /// </summary>
+            Next,
+
+            /// <summary>
+            /// Finish Button
+            /// </summary>
+            Finish
+        }
+
+        #endregion Public Enums
+
         #region Public Methods
+
+        /// <summary>
+        /// Updates the language
+        /// </summary>
+        /// <param name="culture"></param>
+        /// <param name="cancelText"></param>
+        /// <param name="previousText"></param>
+        /// <param name="nextText"></param>
+        /// <param name="finishText"></param>
+        public void UpdateLanguage(CultureInfo culture, string cancelText, string previousText, string nextText, string finishText)
+        {
+            this.LanguageUpdate(culture);
+
+            SetButtonText(ButtonType.Cancel, cancelText);
+            SetButtonText(ButtonType.Finish, finishText);
+            SetButtonText(ButtonType.Next, nextText);
+            SetButtonText(ButtonType.Previous, previousText);
+        }
+
+        /// <summary>
+        /// Set's the text on each button, for localized languages
+        /// </summary>
+        /// <param name="buttonType"></param>
+        /// <param name="text"></param>
+        public void SetButtonText(ButtonType buttonType, string text)
+        {
+            if (buttonType == ButtonType.Cancel)
+                btnCancel.Text = text;
+            else if (buttonType == ButtonType.Finish)
+                btnFinish.Text = text;
+            else if (buttonType == ButtonType.Next)
+                btnNext.Text = text;
+            else if (buttonType == ButtonType.Previous)
+                btnPrevious.Text = text;
+        }
 
         /// <summary>
         /// Instructs the wizard to save data
@@ -236,7 +299,7 @@ namespace SharedControls.WizardBase
         {
             if (_currentPage.BeforeFinish())
             {
-                DialogResult = System.Windows.Forms.DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
         }
 

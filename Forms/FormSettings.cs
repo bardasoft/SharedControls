@@ -11,16 +11,12 @@
  */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
-using SharedControls;
 using Shared;
 
+#pragma warning disable IDE1005 // Delegate invocation can be simplified
+#pragma warning disable IDE1006 // naming rule violation
 
 namespace SharedControls.Forms
 {
@@ -110,10 +106,15 @@ namespace SharedControls.Forms
 
                 RaiseAddSettings(new SettingsLoadArgs(parent));
 
-                if (tvOptions.SelectedNode == null)
-                    tvOptions.SelectedNode = tvOptions.Nodes[0];
-
                 tvOptions.ExpandAll();
+
+                if (tvOptions.Nodes.Count > 0)
+                {
+                    if (tvOptions.SelectedNode == null)
+                        tvOptions.SelectedNode = tvOptions.Nodes[0];
+
+                    tvOptions.Nodes[0].EnsureVisible();
+                }
             }
             finally
             {

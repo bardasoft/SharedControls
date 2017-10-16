@@ -10,15 +10,14 @@
  *
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data;
-using System.Text;
-using System.Windows;
 using System.Windows.Forms;
+
+#pragma warning disable IDE1005 // Delegate invocation can be simplified
+#pragma warning disable IDE0017 // initialization can be simplified
 
 namespace SharedControls
 {

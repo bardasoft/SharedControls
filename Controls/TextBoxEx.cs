@@ -10,10 +10,10 @@
  *
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Forms;
+
+#pragma warning disable IDE0017 // initialization can be simplified
 
 namespace SharedControls
 {
