@@ -166,7 +166,7 @@ namespace SharedControls.Classes.Backup
 
                 // compress it
                 DoOnStageChanged(DatabaseBackupStage.CompressingBackup);
-                Shared.Classes.ZipFiles.CompressFile(backupFile.Replace(".fbk", ".zip"), backupFile, true);
+                //Shared.Classes.ZipFiles.CompressFile(backupFile.Replace(".fbk", ".zip"), backupFile, true);
                 DoOnStageChanged(DatabaseBackupStage.BackupCompressed);
 
                 if (!System.IO.File.Exists(backupFile.Replace(".fbk", ".zip")))
